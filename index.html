@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación del Dolor en Cáncer Pediátrico</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Evaluación del Dolor en Cáncer Pediátrico</h1>
+                <p class="header-subtitle">Herramienta clínica para la valoración del dolor oncológico pediátrico</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <button class="nav-btn active" data-section="inicio">🏠 Inicio</button>
+            <button class="nav-btn" data-section="recursos">📚 Recursos</button>
+            <button class="nav-btn" data-section="acerca">ℹ️ Acerca de</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="inicio" class="section section-active">
+            <div class="container">
+                <div class="intro">
+                    <p>Esta herramienta le permite identificar rápidamente los tipos de dolor más frecuentes según el tipo de cáncer, procedimientos realizados o tratamientos farmacológicos administrados.</p>
+                </div>
+
+                <!-- Search Cards -->
+                <div class="search-cards">
+                    <!-- Cancer Type Search -->
+                    <div class="search-card card-cancer">
+                        <div class="card-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3>🔬 Tipo de Cáncer</h3>
+                        <div class="search-form">
+                            <label for="cancer-select" class="form-label">Seleccione el tipo de cáncer:</label>
+                            <select id="cancer-select" class="form-select">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="tumores_solidos_metastasis">Tumores sólidos con metástasis</option>
+                                <option value="neuroblastoma">Neuroblastoma</option>
+                                <option value="sarcomas_oseos">Sarcomas óseos (osteosarcoma, Ewing)</option>
+                                <option value="sarcomas_tejidos_blandos">Sarcomas de tejidos blandos</option>
+                                <option value="tumores_snc">Tumores del SNC</option>
+                                <option value="lla">Leucemia linfoblástica aguda (LLA)</option>
+                                <option value="lma">Leucemia mieloide aguda (LMA)</option>
+                                <option value="linfomas">Linfomas (Hodgkin, No Hodgkin)</option>
+                            </select>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="buscarCancer()">Buscar</button>
+                                <button class="btn btn-secondary" onclick="limpiarCancer()">Limpiar</button>
+                            </div>
+                        </div>
+                        <div id="cancer-results" class="search-results"></div>
+                    </div>
+
+                    <!-- Procedure Search -->
+                    <div class="search-card card-procedimiento">
+                        <div class="card-icon">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <h3>💉 Procedimiento</h3>
+                        <div class="search-form">
+                            <label for="procedimiento-select" class="form-label">Seleccione el procedimiento:</label>
+                            <select id="procedimiento-select" class="form-select">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="venopuncion">Venopunción/canalización periférica</option>
+                                <option value="acceso_reservorio">Acceso de reservorio/curas</option>
+                                <option value="puncion_lumbar">Punción lumbar (PL)</option>
+                                <option value="aspirado_mo">Aspirado/biopsia de médula ósea</option>
+                                <option value="cirugia">Cirugía oncológica</option>
+                                <option value="radioterapia">Radioterapia</option>
+                                <option value="curaciones">Curaciones/desbridamientos</option>
+                                <option value="tph">Trasplante hematopoyético (TPH)</option>
+                            </select>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="buscarProcedimiento()">Buscar</button>
+                                <button class="btn btn-secondary" onclick="limpiarProcedimiento()">Limpiar</button>
+                            </div>
+                        </div>
+                        <div id="procedimiento-results" class="search-results"></div>
+                    </div>
+
+                    <!-- Drug Search -->
+                    <div class="search-card card-farmaco">
+                        <div class="card-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3>💊 Tratamiento Farmacológico</h3>
+                        <div class="search-form">
+                            <label for="farmaco-select" class="form-label">Seleccione el fármaco:</label>
+                            <select id="farmaco-select" class="form-select">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="vincristina">Vincristina</option>
+                                <option value="platinos">Platinos (cisplatino, carboplatino)</option>
+                                <option value="metotrexato">Metotrexato a altas dosis</option>
+                                <option value="citarabina">Citarabina (Ara-C)</option>
+                                <option value="ciclofosfamida">Ciclofosfamida/Ifosfamida</option>
+                                <option value="asparaginasa">Asparaginasa</option>
+                                <option value="corticoides">Corticoides</option>
+                                <option value="gcsf">G-CSF</option>
+                                <option value="itk">ITK/Inmunoterapias</option>
+                                <option value="antraciclinas">Antraciclinas</option>
+                                <option value="melfalan">Melfalán/Busulfán</option>
+                            </select>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="buscarFarmaco()">Buscar</button>
+                                <button class="btn btn-secondary" onclick="limpiarFarmaco()">Limpiar</button>
+                            </div>
+                        </div>
+                        <div id="farmaco-results" class="search-results"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="recursos" class="section">
+            <div class="container">
+                <h2 class="section-title">Recursos Clínicos</h2>
+                <p class="section-description">Acceda a tablas de referencia, protocolos de titulación y algoritmos de tratamiento.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card" onclick="mostrarRecurso('tabla-tumores')">
+                        <div class="resource-icon">🔬</div>
+                        <h3>Dolor por Tipo de Tumor</h3>
+                        <p>Tabla completa con todos los tipos de cáncer y características del dolor asociado</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                    <div class="resource-card" onclick="mostrarRecurso('tabla-procedimientos')">
+                        <div class="resource-icon">💉</div>
+                        <h3>Dolor por Procedimientos</h3>
+                        <p>Tabla de procedimientos diagnósticos y terapéuticos con tipos de dolor</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                    <div class="resource-card" onclick="mostrarRecurso('tabla-farmacos')">
+                        <div class="resource-icon">💊</div>
+                        <h3>Dolor por Fármacos</h3>
+                        <p>Tabla de fármacos oncológicos y dolor asociado a su administración</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                    <div class="resource-card" onclick="mostrarRecurso('protocolo-opioides')">
+                        <div class="resource-icon">📋</div>
+                        <h3>Protocolo Opioides</h3>
+                        <p>Guía de titulación, conversiones y manejo de efectos adversos</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                    <div class="resource-card" onclick="mostrarRecurso('algoritmo-neuropatico')">
+                        <div class="resource-icon">⚡</div>
+                        <h3>Algoritmo Dolor Neuropático</h3>
+                        <p>Protocolo completo de manejo del dolor neuropático pediátrico</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                    <div class="resource-card" onclick="mostrarRecurso('referencias')">
+                        <div class="resource-icon">📚</div>
+                        <h3>Referencias Bibliográficas</h3>
+                        <p>Lista completa de referencias en formato Vancouver</p>
+                        <button class="btn btn-resource">Ver Recurso</button>
+                    </div>
+                </div>
+
+                <!-- Resource: Tabla Tumores -->
+                <div id="tabla-tumores" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Tabla: Dolor por Tipo de Tumor</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('tabla-tumores')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Tumor</th>
+                                    <th>Prevalencia</th>
+                                    <th>Tipos de Dolor</th>
+                                    <th>Características</th>
+                                    <th>Referencias</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-tumores-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Resource: Tabla Procedimientos -->
+                <div id="tabla-procedimientos" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Tabla: Dolor por Procedimientos</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('tabla-procedimientos')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Procedimiento</th>
+                                    <th>Frecuencia</th>
+                                    <th>Tipo de Dolor</th>
+                                    <th>Características</th>
+                                    <th>Referencias</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-procedimientos-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Resource: Tabla Fármacos -->
+                <div id="tabla-farmacos" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Tabla: Dolor por Fármacos</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('tabla-farmacos')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Fármaco</th>
+                                    <th>Incidencia</th>
+                                    <th>Tipo de Dolor</th>
+                                    <th>Características</th>
+                                    <th>Referencias</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-farmacos-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Resource: Protocolo Opioides -->
+                <div id="protocolo-opioides" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Protocolo de Titulación de Opioides en Niños con Cáncer</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('protocolo-opioides')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="protocol-content">
+                        <div class="protocol-section">
+                            <h4>INICIO DE TRATAMIENTO CON MORFINA</h4>
+                            <p><strong>Para dolor moderado-grave:</strong></p>
+                            <ol>
+                                <li><strong>Iniciar con morfina:</strong>
+                                    <ul>
+                                        <li>Vía IV o subcutánea: 0,1 mg/kg</li>
+                                        <li>Vía oral: 0,2 mg/kg</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Titulación inicial:</strong>
+                                    <ul>
+                                        <li>Si el dolor NO cede → administrar otra dosis igual</li>
+                                        <li>Si persiste dolor → administrar otra dosis</li>
+                                        <li>Repetir hasta alcanzar control del dolor</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Una vez controlado el dolor:</strong>
+                                    <ul>
+                                        <li>Pautar la dosis efectiva cada 6 horas</li>
+                                        <li>Establecer dosis de rescate: 10-15% de la dosis total diaria</li>
+                                        <li>Administrar rescates PRN (según precise)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Reevaluación a las 24 horas:</strong>
+                                    <ul>
+                                        <li>Si dolor basal mal controlado (&gt;3 rescates en 24h): Aumentar dosis total diaria en 20-30%</li>
+                                        <li>Si dolor bien controlado: Mantener pauta actual</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>OTROS OPIOIDES DE INICIO</h4>
+                            <ul>
+                                <li><strong>Hidromorfona:</strong> Oral 40–80 mcg/kg cada 3–4h; IV bolus 10–20 mcg/kg cada 2–4h; Infusión IV 2–6 mcg/kg/h</li>
+                                <li><strong>Fentanilo:</strong> IV bolus 0,5 mcg/kg (máx 50 mcg); Infusión IV 0,5–2 mcg/kg/h; Intranasal 1,5–2 mcg/kg/dosis</li>
+                                <li><strong>Oxicodona:</strong> Oral 0,1–0,2 mg/kg cada 4–6h</li>
+                            </ul>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>CONVERSIONES EQUIANALGÉSICAS</h4>
+                            <p><strong>Dosis Orales (equivalente a Morfina 30 mg oral):</strong></p>
+                            <ul>
+                                <li>Morfina oral: 30 mg</li>
+                                <li>Hidromorfona oral: 6–7,5 mg</li>
+                                <li>Oxicodona oral: 15 mg</li>
+                            </ul>
+                            <p><strong>Dosis IV (equivalente a Morfina 10 mg IV):</strong></p>
+                            <ul>
+                                <li>Morfina IV: 10 mg</li>
+                                <li>Hidromorfona IV: 1,5–2 mg</li>
+                                <li>Fentanilo IV: 100 mcg</li>
+                            </ul>
+                            <p><strong>Ratios Oral:Parenteral:</strong></p>
+                            <ul>
+                                <li>Morfina: 3:1</li>
+                                <li>Hidromorfona: 5:1</li>
+                            </ul>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>MANEJO DE EFECTOS ADVERSOS</h4>
+                            <ul>
+                                <li><strong>Náuseas/vómitos:</strong> Ondansetrón, dimenhidrinato PRN; rotar opioide si persiste</li>
+                                <li><strong>Prurito:</strong> Difenhidramina, cetirizina PRN; naloxona 0,25–1 mcg/kg/h si refractario</li>
+                                <li><strong>Sedación excesiva:</strong> Reducir dosis 10–20%; cambiar IV a oral si tolera</li>
+                                <li><strong>Estreñimiento:</strong> Laxantes desde inicio; promover movilidad</li>
+                                <li><strong>Depresión respiratoria:</strong> Suspender opioide, O₂, naloxona 1–10 mcg/kg IV titrada</li>
+                            </ul>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>DESTETE (WEANING)</h4>
+                            <ul>
+                                <li>&lt;7 días tratamiento: generalmente no requiere destete</li>
+                                <li>≥7 días: reducir 10–20% dosis cada día; monitorizar síntomas abstinencia (WAT-1 score)</li>
+                            </ul>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>ROTACIÓN DE OPIOIDES</h4>
+                            <p>Indicada si: efectos adversos limitantes, tolerancia, control inadecuado</p>
+                            <p><strong>Reducir 25–50% dosis equianalgésica al rotar</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource: Algoritmo Neuropático -->
+                <div id="algoritmo-neuropatico" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Algoritmo de Manejo del Dolor Neuropático Pediátrico</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('algoritmo-neuropatico')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="protocol-content">
+                        <div class="protocol-section">
+                            <h4>EVALUACIÓN Y DIAGNÓSTICO</h4>
+                            <p><strong>Escalas de valoración recomendadas:</strong></p>
+                            <ul>
+                                <li><strong>FLACC</strong> (Face, Legs, Activity, Cry, Consolability): 2 meses - 7 años</li>
+                                <li><strong>Wong-Baker FACES:</strong> &gt;3 años</li>
+                                <li><strong>INRS</strong> (Iowa Neonatal Pain Scale): neonatos</li>
+                            </ul>
+                            <p><strong>Identificar dolor neuropático:</strong> quemazón, hormigueo, pinchazos, alodinia, disestesias, distribución dermatómica</p>
+                            <p><strong>Etiologías en oncopediatría:</strong></p>
+                            <ol>
+                                <li>CIPN (vincristina, platinos)</li>
+                                <li>Compresión tumoral</li>
+                                <li>Dolor fantasma postamputación</li>
+                                <li>Neuropatía post-radioterapia</li>
+                                <li>Dolor postquirúrgico con lesión nerviosa</li>
+                            </ol>
+                        </div>
+
+                        <div class="algorithm-step step-1">
+                            <h4>PRIMER ESCALÓN (primera línea)</h4>
+                            <div class="drug-info">
+                                <h5>AMITRIPTILINA</h5>
+                                <ul>
+                                    <li>Dosis: 0,1–0,2 mg/kg/día</li>
+                                    <li>Administración: Por la noche (dosis única nocturna)</li>
+                                    <li>Dosis máxima: ~1 mg/kg/día (máx 75 mg)</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>GABAPENTINA</h5>
+                                <ul>
+                                    <li>Dosis inicial: 10–20 mg/kg/día</li>
+                                    <li>Administración: Dividir cada 8 horas (3 dosis/día)</li>
+                                    <li>Dosis objetivo: 30–60 mg/kg/día (máx 3600 mg/día)</li>
+                                </ul>
+                            </div>
+                            <p class="evaluation"><strong>Evaluación: 2-4 semanas</strong></p>
+                        </div>
+
+                        <div class="algorithm-step step-2">
+                            <h4>SEGUNDO ESCALÓN (si respuesta insuficiente)</h4>
+                            <div class="drug-info">
+                                <h5>DULOXETINA</h5>
+                                <ul>
+                                    <li>Indicación: &gt;7 años</li>
+                                    <li>Dosis: 30–60 mg/día (dosis única diaria)</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>VENLAFAXINA</h5>
+                                <ul>
+                                    <li>Dosis: 1–2 mg/kg/día</li>
+                                    <li>Administración: Dividir cada 12 horas (2 dosis/día)</li>
+                                    <li>Dosis máxima: ~225 mg/día</li>
+                                </ul>
+                            </div>
+                            <p class="evaluation"><strong>Evaluación: 2-4 semanas</strong></p>
+                        </div>
+
+                        <div class="algorithm-step step-3">
+                            <h4>TERCER ESCALÓN (opioides)</h4>
+                            <div class="drug-info">
+                                <h5>TRAMADOL</h5>
+                                <ul>
+                                    <li>Dosis: 1–2 mg/kg/dosis cada 6 horas</li>
+                                    <li>Dosis máxima: 400 mg/día</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>MORFINA</h5>
+                                <ul>
+                                    <li>Dosis: 0,1–0,2 mg/kg/dosis cada 4–6 horas</li>
+                                    <li>Vía: Oral preferente; IV/SC si necesario</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>METADONA</h5>
+                                <ul>
+                                    <li>Dosis inicial: 0,1–0,2 mg/kg/día</li>
+                                    <li>Administración: Dividir cada 8–12 horas</li>
+                                    <li>Precaución: Monitorización ECG</li>
+                                </ul>
+                            </div>
+                            <p class="evaluation"><strong>Evaluación: 1-2 semanas</strong></p>
+                        </div>
+
+                        <div class="algorithm-step step-4">
+                            <h4>CUARTA LÍNEA (tópicos y coadyuvantes)</h4>
+                            <div class="drug-info">
+                                <h5>LIDOCAÍNA TÓPICA</h5>
+                                <ul>
+                                    <li>Parches al 5% sobre piel íntegra</li>
+                                    <li>12h aplicado, 12h retirado</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>CAPSAICINA TÓPICA</h5>
+                                <ul>
+                                    <li>Concentración: 0,025% - 0,075% crema</li>
+                                    <li>Aplicación: 3-4 veces/día</li>
+                                </ul>
+                            </div>
+                            <div class="drug-info">
+                                <h5>KETAMINA IV (uso hospitalario)</h5>
+                                <ul>
+                                    <li>Dosis: 2–4 mcg/kg/min en infusión</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>ADYUVANTES EN TODOS LOS ESCALONES</h4>
+                            <ul>
+                                <li><strong>Fisioterapia:</strong> desensibilización, movilización</li>
+                                <li><strong>TENS:</strong> estimulación eléctrica transcutánea</li>
+                                <li><strong>Terapia espejo:</strong> dolor fantasma postamputación</li>
+                                <li><strong>Psicología:</strong> TCC, mindfulness</li>
+                                <li><strong>Acupuntura</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="protocol-section">
+                            <h4>CRITERIOS DE DERIVACIÓN A ESPECIALISTA</h4>
+                            <ul>
+                                <li>Dolor refractario tras 3 escalones</li>
+                                <li>Necesidad técnicas intervencionistas</li>
+                                <li>Deterioro funcional significativo</li>
+                                <li>Comorbilidad psicológica compleja</li>
+                            </ul>
+                        </div>
+
+                        <div class="algorithm-diagram">
+                            <h4>DIAGRAMA RESUMIDO</h4>
+                            <div class="diagram-box">
+                                <div class="diagram-step">DOLOR NEUROPÁTICO IDENTIFICADO (FLACC/Wong-Baker/INRS)</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="diagram-step step-highlight-1">PRIMER ESCALÓN<br>• Amitriptilina 0,1-0,2 mg/kg/noche<br>• Gabapentina 10-20 mg/kg/día c/8h</div>
+                                <div class="arrow-down">↓ (2-4 semanas)</div>
+                                <div class="diagram-decision">¿Respuesta? → SÍ: MANTENER / NO: ↓</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="diagram-step step-highlight-2">SEGUNDO ESCALÓN<br>• Duloxetina 30-60 mg/día (&gt;7 años)<br>• Venlafaxina 1-2 mg/kg/día c/12h</div>
+                                <div class="arrow-down">↓ (2-4 semanas)</div>
+                                <div class="diagram-decision">¿Respuesta? → SÍ: MANTENER / NO: ↓</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="diagram-step step-highlight-3">TERCER ESCALÓN<br>• Tramadol 1-2 mg/kg c/6h<br>• Morfina 0,1-0,2 mg/kg c/4-6h<br>• Metadona 0,1-0,2 mg/kg/día c/8-12h</div>
+                                <div class="arrow-down">↓ (1-2 semanas)</div>
+                                <div class="diagram-decision">¿Respuesta? → SÍ: MANTENER / NO: ↓</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="diagram-step step-highlight-4">CUARTA LÍNEA<br>• Lidocaína tópica (parches)<br>• Capsaicina tópica<br>• Ketamina IV<br>• DERIVAR A ESPECIALISTA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource: Referencias -->
+                <div id="referencias" class="resource-content" style="display: none;">
+                    <div class="resource-header">
+                        <h3>Referencias Bibliográficas (Formato Vancouver)</h3>
+                        <button class="btn btn-print" onclick="imprimirRecurso('referencias')"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="referencias-content">
+                        <ol class="referencias-list">
+                            <li>Schulte F, Patton M, Alberts NM, et al. Pain in Long-term Survivors of Childhood Cancer: A Systematic Review of the Current State of Knowledge and a Call to Action from the Children's Oncology Group. Cancer. 2020;127(1):35-44.</li>
+                            <li>van den Beuken-van Everdingen MHJ, Hochstenbach LMJ, Joosten EAJ, et al. Update on Prevalence of Pain in Patients With Cancer: Systematic Review and Meta-Analysis. J Pain Symptom Manage. 2016;51(6):1070-1090.e9.</li>
+                            <li>Schulte F, Patton M, Alberts NM, et al. Pain in Long-term Survivors of Childhood Cancer. Cancer. 2020;127(1):35-44.</li>
+                            <li>Opioid and Non-Opioid Pharmacotherapy Use for Pain Management Among Privately Insured Pediatric Patients With Cancer in the United States. J Natl Compr Canc Netw. 2023;21(11):1123-1132.</li>
+                            <li>Characterization of chronic pain, pain interference, and daily pain experiences in adult survivors of childhood cancer. Pain. 2024;165(7):1563-1574.</li>
+                            <li>Pain and Frailty in Childhood Cancer Survivors: A Narrative Review. Children (Basel). 2024;11(12):1502.</li>
+                            <li>End-of-life care in children and adolescents with cancer: perspectives from a French pediatric oncology care network. Tumori. 2021;107(5):442-449.</li>
+                            <li>Quality of Life and Pain Experienced by Children and Adolescents With Cancer at Home Following Discharge From the Hospital. J Pediatr Oncol Nurs. 2019;36(6):419-427.</li>
+                            <li>Pain Management in Childhood Leukemia: Diagnosis and Available Analgesic Treatments. Cancers (Basel). 2020;12(12):3671.</li>
+                            <li>Neil EC, Hanmantgad S, Khakoo Y. Neurological Complications of Pediatric Cancer. J Child Neurol. 2016;31(12):1412-1420.</li>
+                            <li>Le-Short C, Katragadda K, Nagda N, et al. Interventional Pain Management for the Pediatric Cancer Patient: A Literature Review. Children (Basel). 2022;9(3):389.</li>
+                            <li>Pediatric brain tumors: Current treatment strategies and future therapeutic approaches. Neurotherapeutics. 2009;6(3):570-586.</li>
+                            <li>Musculoskeletal manifestations of childhood malignancies: a systematic review and meta-analysis. Rheumatol Int. 2025;45(3):515-531.</li>
+                            <li>Obesity in pediatric oncology. Pediatr Blood Cancer. 2005;45(7):881-891.</li>
+                            <li>Sarcoma references. Pediatr Oncol. 2020.</li>
+                            <li>Hospitalized children continue to report undertreated and preventable pain. Pain Res Manag. 2014;19(4):198-204.</li>
+                            <li>Interventional Pain Management for the Pediatric Cancer Patient. Children (Basel). 2022;9(3):389.</li>
+                            <li>Hall EA, Morone NE. A Narrative Review of Pain in Pediatric Oncology: The Opioid Option. Paediatr Drugs. 2024;26(5):565-596.</li>
+                            <li>Neuroblastoma references. Pediatr Oncol.</li>
+                            <li>Imaging pediatric bone sarcomas. Radiol Clin North Am. 2011;49(4):749-765.</li>
+                            <li>MDB-48. CIPN measured by PED-MTNS in children with medulloblastoma. Neuro Oncol. 2024;26(Suppl 4):0.</li>
+                            <li>Vincristine induced peripheral neuropathy in children undergoing chemotherapy for ALL. Bangabandhu Sheikh Mujib Med Univ J. 2023;16(2):73-78.</li>
+                            <li>Comparative analysis of CIPN in bioengineered sensory nerve tissue. Toxicol Sci. 2021;180(1):76-89.</li>
+                            <li>Current understanding of molecular mechanisms of CIPN. Front Mol Neurosci. 2024;17:1345811.</li>
+                            <li>Chemotherapy-induced peripheral neuropathy in children and adolescent cancer patients. Front Mol Biosci. 2022;9:1015746.</li>
+                            <li>Protocol-Stipulated Dose Modification to Manage CIPN in Children with High-Risk Hodgkin Lymphoma. JCO Oncol Pract. 2024;20(11):1548-1556.</li>
+                            <li>Total Neuropathy Scale Pediatric Vincristine. Bali Med J. 2018;7(3):658-663.</li>
+                            <li>Electrophysiologic Patterns of Symptomatic Vincristine-Induced Peripheral Neuropathy. J Clin Med. 2022;12(2):686.</li>
+                            <li>Vincristine-induced peripheral neuropathy in children with ALL. Russ J Pediatr Hematol Oncol. 2023;10(3):114-123.</li>
+                            <li>Chemotherapy-induced peripheral neuropathy in children. Front Mol Biosci. 2022;9:1015746.</li>
+                            <li>Vincristine-Induced Peripheral Neuropathy in Pediatric Tumors. Int J Mol Sci. 2021;22(8):4112.</li>
+                            <li>Patterns and severity of vincristine-induced peripheral neuropathy in children with ALL. J Peripher Nerv Syst. 2015;20(1):37-46.</li>
+                            <li>Persistence of CIPN despite vincristine reduction in childhood b-ALL. Pediatr Blood Cancer. 2022;69(9):e29809.</li>
+                            <li>Chemotherapy-related neuropathic symptoms in adult survivors. J Cancer Surviv. 2013;7(3):398-406.</li>
+                            <li>Pathophysiology of Chemotherapy-Induced Peripheral Neuropathy. Front Mol Neurosci. 2017;10:174.</li>
+                            <li>Vincristine-Induced Peripheral Neuropathy: Mechanisms and Treatment. Int J Mol Sci. 2021;22(8):4112.</li>
+                            <li>Newly identified CIPN in a childhood cancer survivorship clinic. Pediatr Blood Cancer. 2022;69(3):e29471.</li>
+                            <li>Efficacy of Propolis in Prevention of Oral Mucositis. Cancer Nurs. 2023;46(6):E364-E371.</li>
+                            <li>Efficacy of Oral Cryotherapy in Prevention of Oral Mucositis. J Pediatr Infect Dis Soc. 2022;11(Suppl 1):S13-S14.</li>
+                            <li>Effects of cryotherapy on high-dose melphalan-induced oral mucositis. Pediatr Blood Cancer. 2020;67(9):e28495.</li>
+                            <li>Intravenous selenium to prevent oral mucositis. J Clin Oncol. 2025;43(16_suppl):12091.</li>
+                            <li>Utilization of Photobiomodulation for Prevention of Oral Mucositis. J Pediatr Hematol Oncol Nurs. 2024;41(2):105-114.</li>
+                            <li>Oral Mucositis Management in Children under Cancer Treatment. Cancers (Basel). 2024;16(8):1548.</li>
+                            <li>Prevalence of oral manifestations in children with cancer. Biosci J. 2016;32(5):1368-1374.</li>
+                            <li>Effect of Oral Care Intervention in Mucositis Management. Asia Pac J Oncol Nurs. 2024;11(7):100486.</li>
+                            <li>Risk factors for oral mucositis in paediatric oncology patients. BMC Oral Health. 2006;6:13.</li>
+                            <li>Management of Oral Mucositis in Children With Malignant Solid Tumors. Front Pediatr. 2021;9:632613.</li>
+                            <li>Guideline for prevention of oral mucositis in children. BMJ Support Palliat Care. 2015;5(3):291-305.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="acerca" class="section">
+            <div class="container">
+                <h2 class="section-title">Acerca de</h2>
+                <div class="about-content">
+                    <div class="about-card">
+                        <h3><i class="fas fa-bullseye"></i> Objetivo</h3>
+                        <p>Herramienta de apoyo clínico para profesionales sanitarios en la evaluación y manejo del dolor en cáncer pediátrico.</p>
+                    </div>
+                    <div class="about-card">
+                        <h3><i class="fas fa-book-medical"></i> Contenido</h3>
+                        <p>Basado en revisión sistemática de literatura científica y guías clínicas internacionales.</p>
+                    </div>
+                    <div class="about-card">
+                        <h3><i class="fas fa-stethoscope"></i> Uso recomendado</h3>
+                        <p>Complemento al criterio médico profesional. No sustituye la valoración clínica individualizada.</p>
+                    </div>
+                    <div class="about-card full-width">
+                        <h3><i class="fas fa-balance-scale"></i> Licencia y Propiedad Intelectual</h3>
+                        <p><strong>© 2025 Álvaro Navarro Mingorance</strong></p>
+                        <p>Esta app web está licenciada bajo una Licencia <strong>Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</strong>.</p>
+                        <p><strong>Más información en:</strong><br>
+                        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank">https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es</a></p>
+                        <p><strong>Autor:</strong><br>
+                        <a href="https://www.linkedin.com/in/alvaro-navarro-mingorance" target="_blank">www.linkedin.com/in/alvaro-navarro-mingorance</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Cuidados Paliativos Pediátricos</h3>
+                <p class="footer-copyright">© 2025 Álvaro Navarro Mingorance. Esta app web se distribuye bajo los términos de la Licencia CC BY-NC-SA 4.0 Internacional.</p>
+            </div>
+            <div class="footer-disclaimer">
+                <p>Herramienta de apoyo clínico. No sustituye el criterio médico profesional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
