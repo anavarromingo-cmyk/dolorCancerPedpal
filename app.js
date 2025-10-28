@@ -20,7 +20,7 @@ const data = {
             prevalencia: "Dolor inicial ~64%",
             tipos_dolor: ["Nociceptivo profundo", "Neuropático"],
             caracteristicas: "Dolor nocturno y en reposo; fractura patológica; dolor fantasma tras amputación",
-            referencias: "33, 36, 63, 149"
+            referencias: "33, 36, 63"
         },
         sarcomas_tejidos_blandos: {
             nombre: "Sarcomas de tejidos blandos",
@@ -41,14 +41,14 @@ const data = {
             prevalencia: "Osteoarticular ~32%; dolor óseo al debut hasta 42%",
             tipos_dolor: ["Nociceptivo somático", "Neuropático", "Visceral"],
             caracteristicas: "Dolor óseo/articular al debut, osteonecrosis (corticoides), CIPN (vincristina), dolor abdominal por complicaciones",
-            referencias: "12, 14, 30, 31, 35, 69, 140, 150, 151"
+            referencias: "12, 14, 30, 31, 35"
         },
         lma: {
             nombre: "Leucemia mieloide aguda (LMA)",
             prevalencia: "Menor que LLA, pero relevante",
             tipos_dolor: ["Nociceptivo", "Visceral", "Neuropático"],
             caracteristicas: "Síntomas similares a LLA pero con menor frecuencia de dolor óseo inicial",
-            referencias: "35, 69"
+            referencias: "35"
         },
         linfomas: {
             nombre: "Linfomas (Hodgkin, No Hodgkin)",
@@ -99,7 +99,7 @@ const data = {
             frecuencia: "40-85% con toxicidad local",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Dolor por inmovilización, mucositis oral/GI, radiodermitis",
-            referencias: "32, 86-103"
+            referencias: "32"
         },
         curaciones: {
             nombre: "Curaciones/desbridamientos",
@@ -113,7 +113,7 @@ const data = {
             frecuencia: ">75% mucositis severa",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Mucositis oro-GI grados 3-4, dolor en EICH, neuropatía por inmunosupresores",
-            referencias: "11, 87, 88, 95-103"
+            referencias: "11, 87, 88"
         }
     },
     farmacos: {
@@ -136,35 +136,35 @@ const data = {
             incidencia: "40-80% mucositis grados 2-4",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Mucositis oro-GI severa: odinofagia, dolor abdominal",
-            referencias: "30, 31, 86-103"
+            referencias: "30, 31, 86"
         },
         citarabina: {
             nombre: "Citarabina (Ara-C)",
             incidencia: "40-70% mucositis",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Mucositis oral y GI severa",
-            referencias: "30, 31, 86-103"
+            referencias: "30, 31"
         },
         ciclofosfamida: {
             nombre: "Ciclofosfamida/Ifosfamida",
             incidencia: "5-70% cistitis hemorrágica",
             tipo_dolor: "Visceral",
             caracteristicas: "Dolor suprapúbico intenso, disuria",
-            referencias: "30, 31, 104-121"
+            referencias: "30, 31"
         },
         asparaginasa: {
             nombre: "Asparaginasa",
             incidencia: "Pancreatitis 2-10%",
             tipo_dolor: "Visceral",
             caracteristicas: "Dolor epigástrico severo",
-            referencias: "30, 31, 122-139"
+            referencias: "30, 31"
         },
         corticoides: {
             nombre: "Corticoides",
             incidencia: "Osteonecrosis 3-20%",
             tipo_dolor: "Nociceptivo somático",
             caracteristicas: "Dolor cadera/rodilla",
-            referencias: "30, 31, 140, 145, 150"
+            referencias: "30, 31"
         },
         gcsf: {
             nombre: "G-CSF",
@@ -185,14 +185,14 @@ const data = {
             incidencia: "Variable",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Mucositis oral",
-            referencias: "30, 96-103"
+            referencias: "30"
         },
         melfalan: {
             nombre: "Melfalán/Busulfán",
             incidencia: "57-90% mucositis TPH",
             tipo_dolor: "Nociceptivo/Inflamatorio",
             caracteristicas: "Mucositis grados 3-4",
-            referencias: "87, 88, 93, 95-103"
+            referencias: "87, 88, 93"
         }
     }
 };
